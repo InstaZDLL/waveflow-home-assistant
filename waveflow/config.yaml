@@ -1,0 +1,52 @@
+# WaveFlow Server as a Home Assistant app.
+#
+# Nothing is built here: the Supervisor pulls the server's own image, the
+# multi-architecture one released at github.com/InstaZDLL/waveflow-server,
+# tagged with `version`. So `version` is always a released server version, and
+# this app moves to a new server release by changing it.
+#
+# The image starts as root, hands /data (this app's private folder) to its
+# account, uid 4533, and runs the server as that account (server 2.2.2, #445).
+name: WaveFlow Server
+version: "2.2.2"
+slug: waveflow
+description: Self-hosted music server with a web player and the OpenSubsonic API
+url: https://github.com/InstaZDLL/waveflow-home-assistant
+arch:
+  - aarch64
+  - amd64
+image: ghcr.io/instazdll/waveflow-server
+startup: application
+boot: auto
+
+ports:
+  4533/tcp: 4533
+ports_description:
+  4533/tcp: Web player and Subsonic apps
+webui: http://[HOST]:[PORT:4533]
+# The server's readiness probe: 200 once the database is open.
+watchdog: http://[HOST]:[PORT:4533]/ready
+
+# Music is read from Home Assistant's media and share folders, never written.
+# /data is the app's own folder: the database, its key, artwork, podcasts.
+map:
+  - type: media
+  - type: share
+# A transcode is rebuilt on demand, so a backup does not need to carry it.
+backup_exclude:
+  - "transcode-cache/*"
+
+# The image carries no Home Assistant labels. With `legacy`, each option below
+# that is set reaches the server as an environment variable of the same name,
+# so the server reads it as it would anywhere else.
+legacy: true
+options: {}
+schema:
+  WAVEFLOW_SETUP_TOKEN: password?
+  WAVEFLOW_PUBLIC_URL: url?
+  WAVEFLOW_UPDATE_CHECK: list(ask|on|off)?
+  WAVEFLOW_METADATA_PROVIDERS: str?
+  WAVEFLOW_METADATA_LASTFM_KEY: password?
+  WAVEFLOW_METADATA_THEAUDIODB_KEY: password?
+  WAVEFLOW_LYRICS_PROVIDERS: str?
+  WAVEFLOW_PODCASTS: list(on|off)?

@@ -1,0 +1,39 @@
+configuration:
+  WAVEFLOW_SETUP_TOKEN:
+    name: Setup token
+    description: >-
+      The one-time token the setup screen asks for while no account exists,
+      at least 16 characters. Choose it here, then create the administrator
+      in the web player. Ignored once an account exists.
+  WAVEFLOW_PUBLIC_URL:
+    name: Public URL
+    description: >-
+      The address people reach the server at, such as
+      https://music.example.com behind a reverse proxy. Leave empty on your
+      own network.
+  WAVEFLOW_UPDATE_CHECK:
+    name: Update check
+    description: >-
+      Whether the server may ask download.waveflow.app for new versions. "ask"
+      lets the first administrator decide. Home Assistant tells you about new
+      versions of the app itself either way.
+  WAVEFLOW_METADATA_PROVIDERS:
+    name: Metadata providers
+    description: >-
+      Comma-separated, among lastfm, deezer and theaudiodb: artist
+      biographies, portraits and banners. Off when empty.
+  WAVEFLOW_METADATA_LASTFM_KEY:
+    name: Last.fm API key
+    description: Your own Last.fm application key, needed for lastfm.
+  WAVEFLOW_METADATA_THEAUDIODB_KEY:
+    name: TheAudioDB API key
+    description: Your own TheAudioDB key, needed for theaudiodb.
+  WAVEFLOW_LYRICS_PROVIDERS:
+    name: Lyrics providers
+    description: >-
+      "lrclib" fetches lyrics for the files that carry none. Off when empty.
+  WAVEFLOW_PODCASTS:
+    name: Podcasts
+    description: Turns podcasts on.
+network:
+  4533/tcp: Web player and Subsonic apps

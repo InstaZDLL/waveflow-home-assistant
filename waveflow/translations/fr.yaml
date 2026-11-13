@@ -1,0 +1,41 @@
+configuration:
+  WAVEFLOW_SETUP_TOKEN:
+    name: Jeton d'installation
+    description: >-
+      Le jeton à usage unique que demande l'écran d'installation tant
+      qu'aucun compte n'existe, 16 caractères au moins. Choisissez-le ici,
+      puis créez l'administrateur dans le lecteur web. Ignoré dès qu'un
+      compte existe.
+  WAVEFLOW_PUBLIC_URL:
+    name: URL publique
+    description: >-
+      L'adresse à laquelle on atteint le serveur, par exemple
+      https://musique.example.com derrière un proxy inverse. Laissez vide
+      sur votre réseau local.
+  WAVEFLOW_UPDATE_CHECK:
+    name: Recherche de mises à jour
+    description: >-
+      Si le serveur peut demander à download.waveflow.app s'il existe une
+      nouvelle version. « ask » laisse décider le premier administrateur.
+      Home Assistant signale de toute façon les nouvelles versions de l'app.
+  WAVEFLOW_METADATA_PROVIDERS:
+    name: Sources de métadonnées
+    description: >-
+      Séparées par des virgules, parmi lastfm, deezer et theaudiodb :
+      biographies, portraits et bannières des artistes. Désactivé si vide.
+  WAVEFLOW_METADATA_LASTFM_KEY:
+    name: Clé API Last.fm
+    description: Votre propre clé d'application Last.fm, nécessaire pour lastfm.
+  WAVEFLOW_METADATA_THEAUDIODB_KEY:
+    name: Clé API TheAudioDB
+    description: Votre propre clé TheAudioDB, nécessaire pour theaudiodb.
+  WAVEFLOW_LYRICS_PROVIDERS:
+    name: Sources de paroles
+    description: >-
+      « lrclib » récupère les paroles des fichiers qui n'en ont pas.
+      Désactivé si vide.
+  WAVEFLOW_PODCASTS:
+    name: Podcasts
+    description: Active les podcasts.
+network:
+  4533/tcp: Lecteur web et apps Subsonic

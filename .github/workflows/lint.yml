@@ -1,0 +1,26 @@
+name: Lint
+
+# Holds the app's config.yaml to the Supervisor's schema, so a key it would
+# refuse is caught here rather than by someone's Home Assistant.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint the app
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: frenck/action-addon-linter@d51677290aef26cdfc835271dd3c7343ce502809 # v2.21.2
+        with:
+          path: ./waveflow
