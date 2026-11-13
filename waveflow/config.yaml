@@ -16,16 +16,14 @@ arch:
   - aarch64
   - amd64
 image: ghcr.io/instazdll/waveflow-server
-startup: application
-boot: auto
 
 ports:
   4533/tcp: 4533
 ports_description:
   4533/tcp: Web player and Subsonic apps
 webui: http://[HOST]:[PORT:4533]
-# The server's readiness probe: 200 once the database is open.
-watchdog: http://[HOST]:[PORT:4533]/ready
+# No `watchdog`: the image's own HEALTHCHECK asks /ready, which the
+# Supervisor reads in its place.
 
 # Music is read from Home Assistant's media and share folders, never written.
 # /data is the app's own folder: the database, its key, artwork, podcasts.
@@ -40,7 +38,6 @@ backup_exclude:
 # that is set reaches the server as an environment variable of the same name,
 # so the server reads it as it would anywhere else.
 legacy: true
-options: {}
 schema:
   WAVEFLOW_SETUP_TOKEN: password?
   WAVEFLOW_PUBLIC_URL: url?
