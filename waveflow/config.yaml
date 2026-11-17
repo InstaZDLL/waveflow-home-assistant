@@ -8,7 +8,7 @@
 # The image starts as root, hands /data (this app's private folder) to its
 # account, uid 4533, and runs the server as that account (server 2.2.2, #445).
 name: WaveFlow Server
-version: "2.2.2"
+version: "2.3.0"
 slug: waveflow
 description: Self-hosted music server with a web player and the OpenSubsonic API
 url: https://github.com/InstaZDLL/waveflow-home-assistant
